@@ -1,14 +1,19 @@
 <?php
-declare(strict_types = 1);                                   
-require '../includes/database-connection.php';                  
+declare(strict_types = 1);                           
+require '../includes/database-connection.php';                   
 require '../includes/functions.php'; 
-session_start();
+
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
 $sql = "SELECT * FROM baiviet as bv
 JOIN tacgia    AS tg  ON bv.ma_bviet = tg.ma_tgia
-JOIN theloai      AS tl  ON bv.ma_bviet = tl.ma_tloai ;";         
+JOIN theloai      AS tl  ON bv.ma_bviet = tl.ma_tloai 
+where ma_bviet = :id;";         
 
-$articles = pdo($pdo, $sql)->fetchAll();  
+$article = pdo($pdo, $sql, [$id])->fetch();  
+
+
+session_start();
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     
@@ -20,12 +25,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $tacgia = trim($_POST["tacgia"]);
     $hinhanh = trim($_POST["hinhanh"]);
     
-    
-        $sql = "INSERT INTO baiviet (ma_bviet,tieude,ten_bhat,ma_tloai,tomtat,noidung,ma_tgia,hinhanh) 
-        VALUES (NULL,:tieude,:tenbaihat,:theloai,:tomtat,:noidung,:tacgia,:hinhanh)";
+        
+        $sql = "UPDATE baiviet SET tieude= :tieude,ten_bhat=:tenbaihat,tomtat=:tomtat,noidung=:noidung,ten_tgia=:tacgia,hinhanh=:hinhanh WHERE ma_bviet  =:id";
  
         if($stmt = $pdo->prepare($sql)){
-            
+           
+
+            $stmt->bindParam(":id", $param_id);
             $stmt->bindParam(":tieude", $param_tieude);
             $stmt->bindParam(":tenbaihat", $param_tenbaihat);
             $stmt->bindParam(":theloai", $param_theloai);
@@ -41,7 +47,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_noidung = $noidung;
             $param_tacgia = $tacgia;
             $param_hinhanh = $hinhanh;
-            
+            $param_id = $id;
            
             if($stmt->execute()){
                 header("location: article.php");
@@ -51,9 +57,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             }
         }
          
+       
         unset($stmt);
+    
+    
    
-        unset($pdo);
+    unset($pdo);
 }
 ?>
 
@@ -105,49 +114,44 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
        
         <div class="row">
             <div class="col-sm">
-                <h3 class="text-center text-uppercase fw-bold">Thêm mới bài viết</h3>
-                <span class="invalid-feedback"><?php echo $category_err;?></span>
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <h3 class="text-center text-uppercase fw-bold">Sửa thông tin bài viết</h3>
+                <form action="" method="post">
                 <div class="input-group mt-3 mb-3">
+                        <span class="input-group-text" id="lblCatId">Mã bài viết</span>
+                        <input type="text" class="form-control" name="txtCatId" readonly value="<?= $article['ma_bviet'] ?>">
+                    </div>
+
+                    <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblCatName">Tiêu đề</span>
-                        <input type="text" class="form-control" name="tieude" >
+                        <input type="text" class="form-control" name="tieude" value = "<?= $article['tieude'] ?>">
                     </div>
                     <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblCatName">Tên bài hát</span>
-                        <input type="text" class="form-control" name="tenbaihat" >
+                        <input type="text" class="form-control" name="tenbaihat" value = "<?= $article['ten_bhat'] ?>">
                     </div>
                     <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblCatName">Thể loại</span>
-                        <select class="ml-5" name="theloai">
-                        <?php foreach ($articles as $article) { ?>
-                        <option value="<?= $article['ma_tloai'] ?>"><?= $article['ten_tloai'] ?></option>
-                            <?php } ?>
-                            </select>
+                        <input type="text" class="form-control" name="theloai" value = "<?= $article['ten_tloai'] ?>">
                     </div>
                     <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblCatName">Tóm tắt</span>
-                        <input type="text" class="form-control" name="tomtat" >
+                        <input type="text" class="form-control" name="tomtat" value = "<?= $article['tomtat'] ?>">
                     </div>
                     <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblCatName">Nội dung</span>
-                        <input type="text" class="form-control" name="noidung" >
+                        <input type="text" class="form-control" name="noidung" value = "<?= $article['noidung'] ?>">
                     </div>
                     <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblCatName">Tác giả</span>
-                        <select name="tacgia">
-                        <?php foreach ($articles as $article) { ?>
-                            <option value="<?= $article['ma_tgia'] ?>"><?= $article['ten_tgia'] ?></option>
-                            <?php } ?>
-                            </select>
+                        <input type="text" class="form-control" name="tacgia" value = "<?= $article['ten_tgia'] ?>">
                     </div>
                     <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblCatName">Hình ảnh</span>
-                        <input type="text" class="form-control" name="hinhanh" >
+                        <input type="text" class="form-control" name="hinhanh" value = "<?= $article['hinhanh'] ?>">
                     </div>
-
                     <div class="form-group  float-end ">
-                        <input type="submit" value="Thêm" class="btn btn-success">
-                        <a href="category.php" class="btn btn-warning ">Quay lại</a>
+                        <input type="submit" value="Lưu lại" class="btn btn-success">
+                        <a href="author.php" class="btn btn-warning ">Quay lại</a>
                     </div>
                 </form>
             </div>

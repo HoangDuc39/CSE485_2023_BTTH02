@@ -1,21 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <ul>
-        <li><a href="./index.php">Trang chủ</a></li>
-        <li><a href="./index.php?controller=article&action=list">Bài viết</a></li>
-    </ul>
-    <h1>Tôi là TRANG CHỦ</h1>
+<?php
+include('views/includes/header.php');
+include('views/includes/slider.php');
+?>
+    <main class="container-fluid mt-3">
+        <h3 class="text-center text-uppercase mb-3 text-primary">TOP bài hát yêu thích</h3>
+        <div class="row">
+            <?php foreach ($articles as $article) { ?>
+            <div class="col-sm-3">
+                <div class="card mb-2" style="width: 100%;">
+                    <img src="<?= $article['hinhanh'] ?>" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">
+                            <a href="?action=show&id=<?=$article['ma_bviet']?>" class="text-decoration-none"><?= $article['ten_bhat'] ?></a>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+    </main>
     <?php
-        foreach($articles as $article){
-            echo "<p>{$article->getTitle()}</p>";
-        }
-    ?>
-</body>
-</html>
+require_once('views/includes/footer.php');
+?>
