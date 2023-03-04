@@ -20,10 +20,10 @@
                             <th scope="row"><?= $article['ma_tloai']?></th>
                             <td><?= $article['ten_tloai']?></td>
                             <td>
-                                <a href="?controller=category&action=update&?id=<?= $article['ma_tloai'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="?controller=category&action=update&id=<?= $article['ma_tloai'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
                             </td>
                             <td>
-                                <a href="?controller=category&action=delete&?id=<?= $article['ma_tloai'] ?>"><i class="fa-solid fa-trash"></i></a>
+                                <a href="?controller=category&action=delete&id=<?= $article['ma_tloai'] ?>"><i class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>
                         
