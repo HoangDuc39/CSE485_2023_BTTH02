@@ -31,8 +31,8 @@ class ArticleService{
        $conn = $dbConn->getConnection();
         // B2. Truy vấn
         $sql = "SELECT * FROM baiviet as bv
-        JOIN tacgia    AS tg  ON bv.ma_bviet = tg.ma_tgia
-        JOIN theloai      AS tl  ON bv.ma_bviet = tl.ma_tloai
+        JOIN tacgia    AS tg  
+        JOIN theloai      AS tl  
         WHERE ma_bviet = :id  ;";         
         
 

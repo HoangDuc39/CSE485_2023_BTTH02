@@ -22,7 +22,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active fw-bold" aria-current="page" href="./">Trang chủ</a>
+                        <a class="nav-link active fw-bold" aria-current="page" href="?controller=home&action=admin">Trang chủ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="?controller=home">Trang ngoài</a>
@@ -35,6 +35,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="?controller=article">Bài viết</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="?controller=member&action=account">Tài khoản</a>
                     </li>
                     <li class="nav-item ">
                         <a class="nav-link" href="?controller=member&action=logout">Đăng xuất</a>

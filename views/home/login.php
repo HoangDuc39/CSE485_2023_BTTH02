@@ -33,7 +33,7 @@ require_once 'views/includes/login.php';
 
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="txtPass"><i class="fas fa-key"></i></span>
-                                <input type="text" name="password" class="form-control" placeholder="password" >
+                                <input type="password" name="password" class="form-control" placeholder="password" >
                             </div>
                             
                             <div class="row align-items-center remember">

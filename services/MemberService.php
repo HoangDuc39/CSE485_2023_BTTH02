@@ -15,6 +15,32 @@ class MemberService{
         $articles = $stmt->fetchAll();
         return $articles;
     }
+    public function getAllAccount(){
+        // 4 bước thực hiện
+       $dbConn = new DBConnection();
+       $conn = $dbConn->getConnection();
+
+        // B2. Truy vấn
+        $sql = "select * from users;";     
+       // $stmt = $conn->query($sql);
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
+        $accounts = $stmt->fetchAll();
+        return $accounts;
+    }
+    public function AddAccount($username,$hashed_password){
+        $dbConn = new DBConnection();
+        $conn = $dbConn->getConnection();
+ 
+         
+         $sql = "INSERT INTO users (id,username,password) VALUES (NULL,:username,:password)";     
+        
+         $stmt = $conn->prepare($sql);
+         $stmt->bindParam(":username", $username);
+         $stmt->bindParam(":password", $hashed_password);
+         $stmt->execute();
+     }
     public function getAccount($username,$password){
         // 4 bước thực hiện
        $dbConn = new DBConnection();
