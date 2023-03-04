@@ -27,7 +27,6 @@ class ArticleService{
         return $articles;
     }
     public function getDetailArticles($id){
-        // 4 bước thực hiện
        $dbConn = new DBConnection();
        $conn = $dbConn->getConnection();
         // B2. Truy vấn
@@ -40,7 +39,7 @@ class ArticleService{
         $stmt = $conn->prepare($sql);
        $stmt->bindValue('id', $id, PDO::PARAM_INT);
         $stmt->execute();
-        $articles = $stmt->fetch();
+        $articles = $stmt->fetch(PDO::FETCH_ASSOC);
 
         return $articles;
     }

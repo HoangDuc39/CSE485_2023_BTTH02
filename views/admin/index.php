@@ -1,4 +1,13 @@
-<?php require_once 'views/includes/header_admin.php'; ?>
+<?php 
+declare(strict_types = 1); 
+session_start();
+ 
+// Kiem tra nguoi dung da dang nhap chua
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: views/home/login.php");
+    exit;
+}
+require_once 'views/includes/header_admin.php'; ?>
     <main class="container mt-5 mb-5">
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
         <div class="row">

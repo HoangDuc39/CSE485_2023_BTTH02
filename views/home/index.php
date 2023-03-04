@@ -11,7 +11,7 @@ include('views/includes/slider.php');
                     <img src="<?= $article['hinhanh'] ?>" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-center">
-                            <a href="?action=show&?id=<?= $article['ma_bviet'] ?>" class="text-decoration-none"><?= $article['ten_bhat'] ?></a>
+                            <a href="?action=show&?id=<?=$article['ma_bviet']?>" class="text-decoration-none"><?= $article['ten_bhat'] ?></a>
                         </h5>
                     </div>
                 </div>

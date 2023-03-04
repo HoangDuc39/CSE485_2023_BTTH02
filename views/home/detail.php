@@ -1,7 +1,7 @@
 <?php
-echo "<pre>";
-print_r($id);
-echo "</pre>";
+           echo"<pre>";
+           print_r($id);
+           echo"</pre>";
 ?>
 <!DOCTYPE html>
 <html lang="en">

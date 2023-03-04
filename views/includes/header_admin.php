@@ -37,7 +37,7 @@
                         <a class="nav-link" href="?controller=article">Bài viết</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="logout.php">Đăng xuất</a>
+                        <a class="nav-link" href="?controller=member&action=logout">Đăng xuất</a>
                     </li>
                 </ul>
                 </div>

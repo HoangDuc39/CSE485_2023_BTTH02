@@ -1,87 +1,12 @@
-<?php
-declare(strict_types = 1);                                    // Use strict types
-require 'includes/database-connection.php';                   // Create PDO object
-require 'includes/functions.php'; 
+<?php 
 session_start();
- 
-// Check if the user is already logged in, if yes then redirect him to welcome page
+        
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: admin/index.php");
+    header("location: index.php?controller=home&action=admin");
     exit;
 }
- 
-
-// Define variables and initialize with empty values
-$username = $password = "";
-$username_err = $password_err = $login_err = "";
- 
-// Processing form data when form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
-    // Check if username is empty
-    if(empty(trim($_POST["username"]))){
-        $username_err = "Please enter username.";
-    } else{
-        $username = trim($_POST["username"]);
-    }
-    
-    // Check if password is empty
-    if(empty(trim($_POST["password"]))){
-        $password_err = "Please enter your password.";
-    } else{
-        $password = trim($_POST["password"]);
-    }
-
-    // Validate credentials
-    if(empty($username_err) && empty($password_err)){
-        // Prepare a select statement
-        $sql = "SELECT id, username, password FROM users WHERE username = :username and password = :password";
-        
-        if($stmt = $pdo->prepare($sql)){
-            $param_username = trim($_POST["username"]);
-            $param_password = trim($_POST["password"]);
-            // Bind variables to the prepared statement as parameters
-            $stmt->bindParam("username", $param_username, PDO::PARAM_STR);
-            $stmt->bindParam("password", $param_password, PDO::PARAM_STR);
-           
-           
-            
-            // Attempt to execute the prepared statement
-            $stmt->execute();
-           
-                // Check if username exists, if yes then verify password
-                if($stmt->rowCount() == 1){
-                    if($row = $stmt->fetch()){
-                        $id = $row["id"];
-                        $username = $row["username"];
-                        $hashed_password = $row["password"];
-                       
-                            // Password is correct, so start a new session
-                            session_start();
-                            
-                            // Store data in session variables
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $id;
-                            $_SESSION["username"] = $username;                            
-                            
-                            header("location: admin/index.php");
-                    }
-                } else{
-                    
-                    $login_err = "Invalid username or password.";
-                }
-            
-
-            // Close statement
-            unset($stmt);
-        }
-    }
-    
-    // Close connection
-    unset($pdo);
-}  
+require_once 'views/includes/login.php';  
 ?>
-<?php require_once 'includes/login.php'; ?>
     <main class="container mt-5 mb-5">
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
         <div class="d-flex justify-content-center h-100">
@@ -100,7 +25,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }        
         ?>
                     <div class="card-body">
-                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                        <form action="" method="post">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="txtUser"><i class="fas fa-user"></i></span>
                                 <input type="text" name="username" class="form-control" placeholder="username" >
@@ -131,4 +56,4 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         </div>
     </main>
-    <?php require_once 'includes/footer.php'; ?>
+    <?php require_once 'views/includes/footer.php'; ?>

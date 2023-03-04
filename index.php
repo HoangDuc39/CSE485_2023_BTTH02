@@ -12,10 +12,10 @@
 <!-- Action là tên cả HÀM trong FILE controller mà chúng ta gọi -->
 
 <?php
+
 // B1: Bắt giá trị controller và action
 $controller = isset($_GET['controller'])?   $_GET['controller']:'home';
 $action     = isset($_GET['action'])?       $_GET['action']:'index';
-$id = filter_input(INPUT_GET,'id', FILTER_VALIDATE_INT) ?? 2;
 
 // B2: Chuẩn hóa tên trước khi gọi
 $controller = ucfirst($controller);

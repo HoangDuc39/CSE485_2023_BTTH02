@@ -1,55 +1,3 @@
-<?php
-declare(strict_types = 1);                                   
-require '../includes/database-connection.php';                  
-require '../includes/functions.php'; 
-session_start();
-$name = $address = $salary = "";
-$name_err = $address_err = $salary_err = "";
- 
-
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    
-    $input_category = trim($_POST["category"]);
-    if(empty($input_category)){
-        $category_err = "Please enter a category.";
-    } 
-     else{
-        $category = $input_category;
-    }
-    
-    
-    
-    
-    if(empty($category_err) ){
-        
-        $sql = "INSERT INTO theloai (ma_tloai,ten_tloai) VALUES (NULL,:category)";
- 
-        if($stmt = $pdo->prepare($sql)){
-            
-            $stmt->bindParam(":category", $param_category);
-         
-            
-           
-            $param_category = $category;
-            
-           
-            if($stmt->execute()){
-                header("location: category.php");
-                exit();
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
-            }
-        }
-         
-        
-        unset($stmt);
-    }
-    
-    
-    unset($pdo);
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,7 +48,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="col-sm">
                 <h3 class="text-center text-uppercase fw-bold">Thêm mới thể loại</h3>
                 <span class="invalid-feedback"><?php echo $category_err;?></span>
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <form action="" method="post">
                     <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblCatName">Tên thể loại</span>
                         <input type="text" class="form-control" name="category" >

@@ -3,7 +3,7 @@
       
         <div class="row">
             <div class="col-sm">
-                <a href="add_category.php" class="btn btn-success">Thêm mới</a>
+                <a href="?controller=category&action=add" class="btn btn-success">Thêm mới</a>
                 <table class="table">
              
                     <thead>
@@ -20,10 +20,10 @@
                             <th scope="row"><?= $article['ma_tloai']?></th>
                             <td><?= $article['ten_tloai']?></td>
                             <td>
-                                <a href="edit_category.php?id=<?= $article['ma_tloai'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="?controller=category&action=update&?id=<?= $article['ma_tloai'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
                             </td>
                             <td>
-                                <a href="delete_category.php?id=<?= $article['ma_tloai'] ?>"><i class="fa-solid fa-trash"></i></a>
+                                <a href="?controller=category&action=delete&?id=<?= $article['ma_tloai'] ?>"><i class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>
                         
