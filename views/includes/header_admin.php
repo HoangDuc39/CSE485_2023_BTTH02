@@ -32,7 +32,7 @@
                         <a class="nav-link" href="?controller=category">Thể loại</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="?controller=member">Tác giả</a>
+                        <a class="nav-link" href="?controller=author">Tác giả</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="?controller=article">Bài viết</a>

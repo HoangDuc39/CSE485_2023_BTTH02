@@ -5,7 +5,7 @@ include("configs/functions.php");
         
         <div class="row">
             <div class="col-sm">
-                <a href="add_author.php" class="btn btn-success">Thêm mới</a>
+                <a href="?controller=author&action=add" class="btn btn-success">Thêm mới</a>
                 <table class="table">
              
                     <thead>
@@ -22,10 +22,10 @@ include("configs/functions.php");
                             <th scope="row"><?= html_escape($article['ma_tgia']) ?></th>
                             <td><?= html_escape($article['ten_tgia']) ?></td>
                             <td>
-                                <a href="edit_author.php?id=<?= $article['ma_tgia'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="?controller=author&action=update&id=<?= $article['ma_tgia'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
                             </td>
                             <td>
-                                <a href="delete_author.php?id=<?= $article['ma_tgia'] ?>"><i class="fa-solid fa-trash"></i></a>
+                                <a href="?controller=author&action=delete&id=<?= $article['ma_tgia'] ?>"><i class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>
                         
