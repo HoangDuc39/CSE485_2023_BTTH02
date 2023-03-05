@@ -5,7 +5,7 @@ class HomeController{
     public function index(){
 
         $articleService = new ArticleService();
-        $articles = $articleService->getAllArticles();
+        $articles = $articleService->getHomeArticles();
 
         include("views/home/index.php");
     }
