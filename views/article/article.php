@@ -3,7 +3,7 @@
         
         <div class="row">
             <div class="col-sm">
-                <a href="add_article.php" class="btn btn-success">Thêm mới</a>
+                <a href="?controller=article&action=add" class="btn btn-success">Thêm mới</a>
                 <table class="table">
              
                     <thead>
@@ -28,10 +28,10 @@
                             <td><?= $article['noidung'] ?></td>
                             <td><img src="<?= $article['hinhanh'] ?>" class="card-img-top" alt="..."></td>
                             <td>
-                                <a href="edit_article.php?id=<?= $article['ma_bviet'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="?controller=article&action=update&id=<?= $article['ma_bviet'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
                             </td>
                             <td>
-                                <a href="delete_article.php?id=<?= $article['ma_bviet'] ?>"><i class="fa-solid fa-trash"></i></a>
+                                <a href="?controller=article&action=delete&id=<?= $article['ma_bviet'] ?>"><i class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>
                         

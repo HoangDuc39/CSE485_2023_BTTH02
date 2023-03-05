@@ -25,9 +25,7 @@ class CategoryController{
         $id = $_GET['id'];
         $categoryService = new CategoryService();
         $article = $categoryService->getCategoryById($id);
-        echo "<pre>";
-        print_r($article);
-        echo "</pre>";
+
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             $category = trim($_POST["category"]);
             $categoryService = new CategoryService();
